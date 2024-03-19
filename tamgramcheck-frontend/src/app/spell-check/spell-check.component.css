@@ -1,0 +1,92 @@
+li:hover {
+  background: gainsboro;
+}
+
+/* Popup container */
+.popup {
+  position: relative;
+  display: inline-block;
+}
+
+/* The actual popup (appears on top) */
+.popuptext {
+  visibility: hidden;
+  width: 5cm;
+  background-color: #fff;
+  color: #fff;
+  text-align: left;
+  border-radius: 2px;
+  position: absolute;
+  left:100%;
+  top:105%;
+  z-index:1;
+}
+
+/* Popup arrow */
+.popup .popuptext::after {
+  content: "";
+  position: absolute;
+  left: 3px;
+  border-color: #828282 transparent transparent transparent;
+}
+
+/* Toggle this class when clicking on the popup container (hide and show the popup) */
+.popup .show {
+  visibility: visible;
+  -webkit-animation: fadeIn 1s;
+  animation: fadeIn 1s
+}
+
+.popup .close{
+  visibility: hidden;
+}
+
+/* Add animation (fade in the popup) */
+@-webkit-keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity:1 ;}
+}
+
+.spinner {
+    width: 100px;
+    height: 100px;
+    border: 5px solid #f2f3f3;
+    border-top: 5px solid #28a745;
+    border-radius: 100%;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    animation: spin 1s infinite linear;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.noSuggestion {
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100px;
+  height: 100px;
+}
+
+.suggBox {
+  border: 1px solid #828282;
+}

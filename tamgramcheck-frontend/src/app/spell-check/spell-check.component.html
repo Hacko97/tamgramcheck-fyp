@@ -1,0 +1,61 @@
+<div>
+  <div class="row">
+    <div class="spinner" id="spinnerId" *ngIf="suggestionWait"></div>
+  </div>
+  <div>
+    <form class="form" [formGroup]="doSpellCheckForm" (ngSubmit)="DoSpellCheck(doSpellCheckForm.value)">
+      <div class="form-group">
+        <textarea formControlName="spellArea" class="form-control" id="spellArea" style="overflow-wrap:break-word;overflow: scroll;height: 10cm;">
+
+        </textarea>
+      </div>
+      <div>
+        <div contenteditable="true" class="form-control" id="spellAns" style="overflow-wrap:break-word;overflow: scroll;height: 10cm;" (click)="clickOnContent()">
+            <span *ngFor="let word of words; let i = index" id="{{i}}">
+              <span class="popup" *ngIf="misspelled.includes(word)" (click)="GiveSuggestion(word, i)" style='border-bottom:1px solid #ff0000;'>{{word}}
+                <span class="popuptext" id="{{i+'m'}}" style="overflow-wrap:break-word;overflow: scroll;height: 5cm;width:5cm">
+                    <ul class="list-group suggBox">
+                      <li class="list-group-item suggBox" (click)="changeMisspelled(word, i+'m')" style="color:black">Ignore</li>
+                      <li class="list-group-item suggBox" *ngFor="let w of suggestionList" (click)="changeMisspelled(w, i+'m')" style="color:black">{{w}}</li>
+                      <li class="list-group-item suggBox" (click)="changeMisspelled(word, i+'d')" style="color:black">Add to Dictionary</li>
+                    </ul>
+                </span>
+              </span>{{' '}}
+              <span class="popup" *ngIf="cantiMistake.includes(word)" (click)="GiveSuggestionCanti(word, i)" style='border-bottom:1px solid #0000ff;'>{{word}}
+                <span class="popuptext" id="{{i+'c'}}" style="display:inline-block">
+                    <ul class="list-group suggBox">
+                      <li class="list-group-item suggBox" (click)="changeMisspelled(word, i+'c')" style="color:black">Ignore</li>
+                      <li class="list-group-item suggBox" *ngIf="thisCantiCorr!=''" (click)="changeMisspelled(thisCantiCorr, i+'c')" style="color:black">{{thisCantiCorr}}</li>
+                    </ul>
+                </span>
+              </span>{{' '}}
+              <span *ngIf="!(misspelled.includes(word) || cantiMistake.includes(word))" (click)="hideSuggestion()">{{word}}</span>{{' '}}
+            </span>
+          </div>
+      </div>
+      <br>
+      <div class="row justify-content-center">
+        <button type="submit" class="btn btn-success col-2" id="check" name="check"><i class='fa fa-spinner fa-spin' *ngIf="clicked"></i>Spell Check</button>
+    
+        <!-- <button type="submit" class="btn btn-success col-2" id="grammar-check" name="grammar-check"><i class='fa fa-spinner fa-spin' *ngIf="clicked"></i>grammar Check</button> -->
+        <button type="button" class="btn btn-success col-2" id="finish" name="finish" *ngIf="finished" (click)="goToSpell()">Finish</button>
+      </div>
+    </form>
+  
+
+  </div>
+
+
+
+</div>
+  <!--<div class="col-3">
+    <div class="alert alert-success" id="noSuggMsg" style="position: relative;display: inline-block;cursor: pointer;">
+      <strong>No Suggestion!!!</strong>
+    </div>
+    <div id="suggWait" *ngIf="suggestionWait" style="height: 5cm;">
+      <br>
+      <div class="col-4"></div>
+      <div class="col-4"><i class="fa fa-spinner fa-pulse fa-3x fa-fw" style="color: green;alignment: center;"></i></div>
+      <div class="col-4"></div>
+    </div>
+  </div>-->

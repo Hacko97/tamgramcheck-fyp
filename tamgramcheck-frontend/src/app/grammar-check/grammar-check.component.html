@@ -1,0 +1,56 @@
+<h1>TamGramCheck</h1>
+<div>
+  <div class="row">
+    <div class="spinner" id="spinnerId" *ngIf="suggestionWait"></div>
+  </div>
+  <div>
+    <form class="form" [formGroup]="doGrammarCheckForm" (ngSubmit)="DoGrammarCheck(doGrammarCheckForm.value)">
+      <div class="form-group">
+        <textarea formControlName="grammarArea" class="form-control" id="grammarArea" style="overflow-wrap:break-word;overflow: scroll;height: 10cm;">
+
+        </textarea>
+      </div>
+      <div>
+        <div contenteditable="true" class="form-control" id="grammarAns" style="overflow-wrap:break-word;overflow: scroll;height: 10cm;" (click)="clickOnContent()">
+          <span *ngFor="let wordList of wordListofList; let i = index" id="{{i}}">
+            <span *ngFor="let word of wordList; let j = index" id="{{j}}">
+              <span class="popup" *ngIf="errorSentenceList.includes(sentenceList[i])" (click)="GiveSuggestion(word, i)" style='border-bottom:1px solid #ff0000;'>{{word}}
+                <span class="popuptext" id="{{j+'m'}}" style="overflow-wrap:break-word;overflow: scroll;height: 5cm;width:5cm">
+                    <ul class="list-group suggBox">
+                      <!-- <li class="list-group-item suggBox" style="color:black">Ignore</li> -->
+                      <li class="list-group-item suggBox" *ngFor="let w of suggestionList" style="color:black">{{w}}</li>
+  
+                    </ul>
+                </span>
+              </span>{{' '}}
+              <span *ngIf="!(errorSentenceList.includes(sentenceList[i]))">{{word}}</span>{{' '}}
+            </span>
+           
+
+          </span>
+        </div>
+        
+        
+
+      </div>
+      <br>
+      <div class="row justify-content-center">
+        <!-- <button type="submit" class="btn btn-success col-2" id="check" name="check"><i class='fa fa-spinner fa-spin' *ngIf="clicked"></i>Spell Check</button> -->
+    
+        <button type="submit" class="btn btn-success col-2" id="check" name="check"><i class='fa fa-spinner fa-spin' *ngIf="clicked"></i>Grammar Check</button>
+        <button type="button" class="btn btn-success col-2" id="finish" name="finish" *ngIf="finished" onClick="document.location.reload(true)">Clear & Start Over</button>
+      </div>
+    </form>
+    </div>
+  </div>
+  <!--<div class="col-3">
+    <div class="alert alert-success" id="noSuggMsg" style="position: relative;display: inline-block;cursor: pointer;">
+      <strong>No Suggestion!!!</strong>
+    </div>
+    <div id="suggWait" *ngIf="suggestionWait" style="height: 5cm;">
+      <br>
+      <div class="col-4"></div>
+      <div class="col-4"><i class="fa fa-spinner fa-pulse fa-3x fa-fw" style="color: green;alignment: center;"></i></div>
+      <div class="col-4"></div>
+    </div>
+  </div>-->
